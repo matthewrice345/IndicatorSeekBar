@@ -1523,8 +1523,9 @@ public class IndicatorSeekBar extends View {
     /**
      * @param indicatorStayAlways IndicatorStayLayout call this, always true.
      */
-    void setIndicatorStayAlways(boolean indicatorStayAlways) {
+    public void setIndicatorStayAlways(boolean indicatorStayAlways) {
         this.mIndicatorStayAlways = indicatorStayAlways;
+        invalidate();
     }
 
     View getIndicatorContentView() {
