@@ -333,7 +333,7 @@ public class IndicatorSeekBar extends View {
     }
 
     private boolean needDrawText() {
-        return mShowThumbText || (mTicksCount != 0 && mShowTickText);
+        return mShowThumbText || (mTicksCount != 0 && (mShowTickText && mShowTickTextAlongBottom));
     }
 
     private void initTextPaint() {
