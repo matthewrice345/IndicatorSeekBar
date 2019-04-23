@@ -78,6 +78,7 @@ public class IndicatorSeekBar extends View {
     //tick texts
     private boolean mShowTickText;//the palace where the tick text show .
     private boolean mShowBothTickTextsOnly;//show the tick texts on the both ends of seek bar before.
+    private boolean mShowTickTextAlongBottom;//show the tick texts on the both ends of seek bar before.
     private int mTickTextsHeight;//the height of text
     private String[] mTickTextsArr;//save the tick texts which at tickMark position.
     private float[] mTickTextsWidth;//save the tick texts width bounds.
@@ -570,6 +571,11 @@ public class IndicatorSeekBar extends View {
         if (mTickTextsArr == null) {
             return;
         }
+
+        if(!mShowTickTextAlongBottom) {
+          return;
+        }
+
         float thumbPosFloat = getThumbPosOnTickFloat();
         for (int i = 0; i < mTickTextsArr.length; i++) {
             if (mShowBothTickTextsOnly) {
@@ -1523,9 +1529,8 @@ public class IndicatorSeekBar extends View {
     /**
      * @param indicatorStayAlways IndicatorStayLayout call this, always true.
      */
-    public void setIndicatorStayAlways(boolean indicatorStayAlways) {
+    void setIndicatorStayAlways(boolean indicatorStayAlways) {
         this.mIndicatorStayAlways = indicatorStayAlways;
-        invalidate();
     }
 
     View getIndicatorContentView() {
@@ -1954,6 +1959,15 @@ public class IndicatorSeekBar extends View {
     public void showBothEndsTickTextsOnly(boolean onlyShow) {
         this.mShowBothTickTextsOnly = onlyShow;
     }
+
+  /**
+   * Show or hide the tick text along the bottom, if false default behavior of [showBothEndsTickTExtOnly] takes precedence
+   *
+   * @param show true if show or hide the text text along the bottom
+   */
+  public void showTickTextAlongBottom(boolean show) {
+    this.mShowTickTextAlongBottom = show;
+  }
 
     /**
      * prevent user from seeking
