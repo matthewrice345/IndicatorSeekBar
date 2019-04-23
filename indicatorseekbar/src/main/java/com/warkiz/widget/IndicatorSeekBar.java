@@ -327,13 +327,18 @@ public class IndicatorSeekBar extends View {
         if (needDrawText()) {
             initTextPaint();
             mTextPaint.setTypeface(mTextsTypeface);
-            mTextPaint.getTextBounds("j", 0, 1, mRect);
-            mTickTextsHeight = mRect.height() + SizeUtils.dp2px(mContext, 3);//with the gap(3dp) between tickTexts and track.
+            if(!mShowTickTextAlongBottom) {
+              mRect = new Rect(0, 0, 0, 0);
+              mTickTextsHeight = 0;
+            } else {
+              mTextPaint.getTextBounds("j", 0, 1, mRect);
+              mTickTextsHeight = mRect.height() + SizeUtils.dp2px(mContext, 3);//with the gap(3dp) between tickTexts and track.
+            }
         }
     }
 
     private boolean needDrawText() {
-        return mShowThumbText || (mTicksCount != 0 && (mShowTickText && mShowTickTextAlongBottom));
+        return mShowThumbText || (mTicksCount != 0 && mShowTickText);
     }
 
     private void initTextPaint() {
